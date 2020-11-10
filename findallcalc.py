@@ -1,11 +1,6 @@
 import random
 import csv
 
-'''def csvReader (filename):
-    with open (fileName, mode ="r") as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=",")
-        listName = list(csv.reader(csv_file))'''
-
 #opening and indexing all loot files
 with open ("commonLoot.csv", mode ="r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -24,33 +19,32 @@ expectedRuns = int(input("Please enter number of runs: "))
 numRun = 1
 totalBoxes = 0
 
-#loop that runs until all items are found
+#loop that runs until all items are found; drop chances set based on PoE Misetery boxes;
 while numRun <= expectedRuns:
-    totalDropsList = {}
-    x = len(totalDropsList)
+    totalDropsList = {} 
+    x = len(totalDropsList) 
     i = 0
     while x < 38:
         itemPool = random.randint(1, 100)
-        if itemPool <= 45:
+        if itemPool <= 45:  #45% drop chance for common items
             lootDrop = random.randint(1,12)
             lootDropItem = dataCommon[lootDrop][2]
             totalDropsList[f"{lootDropItem}"] = "1"
             i += 1
             x = len(totalDropsList)
-        elif itemPool <= 80:
+        elif itemPool <= 80:    #35% drop chance for uncommon items
             lootDrop = random.randint(1,12)
             lootDropItem = dataUncommon[lootDrop][2]
             totalDropsList[f"{lootDropItem}"] = "1"
             i += 1
             x = len(totalDropsList)
         else:
-            lootDrop = random.randint(1,14)
+            lootDrop = random.randint(1,14) #20% drop chance for rare items
             lootDropItem = dataRare[lootDrop][2]
             totalDropsList[f"{lootDropItem}"] = "1"
             i += 1
             x = len(totalDropsList)
     totalBoxes += i
-    #print (f"During run {numRun} it took {i} boxes to find {len(totalDropsList)} items.")
     numRun += 1
 
 #calculating average and showing results
